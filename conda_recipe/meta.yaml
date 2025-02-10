@@ -1,0 +1,33 @@
+package:
+    name: pwd_printer_project
+    version: "1.0.0"
+
+source:
+    path: ../src
+
+build:
+    number: 0
+    script: |
+        mkdir build
+        cmake -G Ninja -B ./build -DCMAKE_INSTALL_PREFIX=%CONDA_PREFIX% -DCMAKE_BUILD_TYPE=Release
+        cmake --build ./build
+        cmake --install ./build
+
+requirements:
+    build:
+        - cmake
+        - ninja
+        - vs2022_win-64
+        - fmt ==11.0.2
+
+test:
+    commands:
+        - pwd_printer
+
+about:
+    home: "https://github.com/Danleb/conda_test_package"
+    license: "MIT"
+    summary: "A C++ project example for printing pwd packaged with Conda."
+    description: |
+        This package creates dummy program pwd_printer which just print current working directory and exits. This project
+        is built with CMake and uses fmt as a test dependency.
